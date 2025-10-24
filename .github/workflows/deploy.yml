@@ -1,0 +1,61 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    # Grant GITHUB_TOKEN permissions for deployment
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+
+    - name: Validate HTML
+      run: |
+        echo "📄 Validating HTML structure..."
+        # Check if index.html exists and has basic structure
+        if [ -f "index.html" ]; then
+          echo "✅ index.html found"
+          # Basic validation - check for essential tags
+          if grep -q "<!DOCTYPE html>" index.html && grep -q "<html" index.html && grep -q "<head" index.html && grep -q "<body" index.html; then
+            echo "✅ HTML structure looks good"
+          else
+            echo "⚠️  HTML structure might be incomplete"
+          fi
+        else
+          echo "❌ index.html not found - looking for HTML files..."
+          # Find any HTML file
+          HTML_FILE=$(find . -name "*.html" -not -path "./.*" | head -1)
+          if [ -n "$HTML_FILE" ]; then
+            echo "📁 Found HTML file: $HTML_FILE"
+            # Rename to index.html for GitHub Pages
+            cp "$HTML_FILE" index.html
+          else
+            echo "❌ No HTML files found"
+            exit 1
+          fi
+        fi
+
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: .
+        
+    # Deploy step - only runs on main branch pushes
+    - name: Deploy to GitHub Pages
+      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+      id: deployment
+      uses: actions/deploy-pages@v4
