@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Amanuel Tekalign — Data Scientist Portfolio</title>
+  <meta name="description" content="Portfolio of Amanuel Tekalign — Data Scientist | Engineer" />
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#071017; /* deep navy */
+      --card:#0b1a22;
+      --muted:#9fb3bf;
+      --neon:#00ffd5; /* teal neon */
+      --accent:#b400ff; /* magenta accent for small highlights */
+      --glass: rgba(255,255,255,0.03);
+      --glass-2: rgba(255,255,255,0.02);
+      --radius:16px;
+      --container:1100px;
+      --mono: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;padding:0;
+      font-family:var(--mono);
+      background:radial-gradient(1200px 600px at 10% 10%, rgba(0,255,213,0.03), transparent),
+                 radial-gradient(800px 400px at 95% 90%, rgba(180,0,255,0.03), transparent),
+                 var(--bg);
+      color:#e6f7f5;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding-bottom:80px;
+    }
+
+    .container{max-width:var(--container);margin:0 auto;padding:40px 20px}
+
+    /* NAV */
+    .topbar{position:fixed;left:0;right:0;top:14px;z-index:60;display:flex;justify-content:center}
+    .nav-inner{width:100%;max-width:var(--container);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border-radius:20px;padding-left:18px;padding-right:18px;backdrop-filter:blur(6px);box-shadow:0 6px 20px rgba(2,6,10,0.6)}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--neon),var(--accent));display:grid;place-items:center;font-weight:800;color:#021;box-shadow:0 6px 18px rgba(0,255,213,0.08), inset 0 -4px 18px rgba(0,0,0,0.3)}
+    .brand h1{font-size:16px;margin:0}
+    .nav-links{display:flex;gap:12px;align-items:center}
+    .nav-links a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:600;font-size:13px}
+    .nav-links a:hover{color:var(--neon);background:var(--glass)}
+    .cta{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:10px;color:var(--neon);font-weight:700}
+
+    /* HERO */
+    .hero{display:block;padding:120px 0 40px}
+    .intro h2{font-size:36px;margin:0 0 8px;line-height:1.02}
+    .intro .tag{color:var(--neon);font-weight:700;letter-spacing:0.6px}
+    .intro p{color:var(--muted);max-width:100%}
+
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:22px;border-radius:16px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 40px rgba(3,9,12,0.6)}
+
+    /* PROFILE */
+    .profile{display:flex;gap:18px;align-items:center}
+    .avatar{width:96px;height:96px;border-radius:12px;background:linear-gradient(180deg,#071a1b,#061015);display:grid;place-items:center;border:1px solid rgba(255,255,255,0.04)}
+    .avatar img{width:88px;height:88px;border-radius:10px;object-fit:cover}
+    .meta h3{margin:0;font-size:18px}
+    .meta p{margin:4px 0 0;color:var(--muted);font-size:13px}
+
+    /* PROJECTS */
+    .projects{margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:linear-gradient(180deg,var(--card), #07151a);padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);transition:transform .32s ease, box-shadow .32s ease}
+    .card:hover{transform:translateY(-8px);box-shadow:0 18px 48px rgba(0,0,0,0.6)}
+    .card h4{margin:0 0 6px}
+    .card p{margin:0;color:var(--muted);font-size:13px}
+    .card .tags{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}
+    .tag-pill{font-size:12px;padding:6px 8px;border-radius:8px;background:linear-gradient(90deg, rgba(0,255,213,0.06), rgba(180,0,255,0.03));color:var(--neon);border:1px solid rgba(0,255,213,0.06)}
+    .card .actions{display:flex;gap:10px;margin-top:12px}
+    .btn{padding:8px 12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);cursor:pointer}
+    .btn.primary{border-color:var(--neon);color:var(--neon);font-weight:700}
+
+    /* SKILLS */
+    .skills{margin-top:36px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .skill-row{display:flex;flex-direction:column;gap:8px}
+    .skill{display:flex;justify-content:space-between;font-weight:700;color:var(--muted);font-size:14px}
+    .bar{height:10px;background:var(--glass-2);border-radius:8px;overflow:hidden}
+    .bar > i{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--neon),var(--accent));border-radius:8px;transition:width 1.2s cubic-bezier(.2,.9,.3,1)}
+
+    /* CONTACT */
+    .contact{margin-top:24px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:16px;border-radius:12px}
+    .form-row{display:flex;gap:8px}
+    input,textarea{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:10px;border-radius:10px;color:var(--muted);width:100%}
+    textarea{min-height:110px}
+    .send{background:linear-gradient(90deg,var(--neon),var(--accent));border:none;color:#021;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer}
+
+    /* FOOTER */
+    footer{margin-top:40px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* RESPONSIVE */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;}
+      .projects{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:640px){
+      .nav-links{display:none}
+      .projects{grid-template-columns:1fr}
+      .intro p{max-width:100%}
+      .brand h1{display:none}
+    }
+
+    /* small utilities */
+    .muted{color:var(--muted)}
+    .center{display:grid;place-items:center}
+
+    /* Modal */
+    .modal{position:fixed;inset:0;display:grid;place-items:center;background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6));visibility:hidden;opacity:0;transition:all .2s; z-index:100}
+    .modal.show{visibility:visible;opacity:1}
+    .modal-card{width:720px;max-width:94%;background:linear-gradient(180deg,#071a1f,#051014);padding:22px;border-radius:14px;border:1px solid rgba(255,255,255,0.04)}
+
+    /* Contact Modal */
+    .contact-modal .modal-card{width:500px;max-width:90%}
+
+    /* micro animations */
+    .glow{animation:neon 2.4s ease-in-out infinite}
+    @keyframes neon{0%{filter:drop-shadow(0 0 6px rgba(0,255,213,0.12))}50%{filter:drop-shadow(0 0 18px rgba(180,0,255,0.12))}100%{filter:drop-shadow(0 0 6px rgba(0,255,213,0.12))}}
+
+    /* Social Links */
+    .social-links{display:flex;gap:12px;align-items:center}
+    .social-link{color:var(--neon);text-decoration:none;font-weight:600;transition:all 0.3s ease}
+    .social-link:hover{color:var(--accent);text-decoration:underline}
+
+    /* Form Status Messages */
+    .form-status{display:none;padding:10px;border-radius:8px;margin-top:10px;text-align:center}
+    .form-status.success{display:block;background:rgba(0,255,213,0.1);color:var(--neon);border:1px solid var(--neon)}
+    .form-status.error{display:block;background:rgba(255,0,0,0.1);color:#ff6b6b;border:1px solid #ff6b6b}
+
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="nav-inner container">
+      <div class="brand">
+        <div class="logo">AT</div>
+        <div>
+          <h1>Amanuel Tekalign</h1>
+          <div class="muted" style="font-size:12px">Data Scientist | Engineer</div>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+        <button class="cta" id="themeToggle">Toggle Theme</button>
+      </nav>
+    </div>
+  </div>
+
+  <main class="container">
+
+    <section class="hero">
+      <div class="intro">
+        <h2 class="glow" id="heroName">Hi  I'm <span style="color:var(--neon)">Amanuel</span></h2>
+        <div class="tag">Data Scientist | Engineer</div>
+        <p style="margin-top:14px">Data Science professional certified in Software Engineering. Self-taught and proficient in Python, SQL, TensorFlow, PyTorch, and scikit-learn, with applied expertise in predictive modeling, sentiment analysis, fraud detection, and price prediction. Experienced in transforming complex data into actionable insights through visualization and advanced machine learning techniques.</p>
+
+        <div style="margin-top:18px;display:flex;gap:12px;align-items:center">
+          <a class="btn primary" href="#projects">See Projects</a>
+          <button class="btn" onclick="openContactModal()">Contact Me</button>
+        </div>
+
+        <div style="margin-top:22px;display:flex;gap:12px;align-items:center">
+          <div class="profile">
+            <div class="avatar"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&s=1a" alt="avatar"></div>
+            <div class="meta">
+              <h3>Amanuel Tekalign</h3>
+              <p class="muted">Data Scientist • Python • ML • Data Visualization</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Stats Section (moved above Projects) -->
+    <section style="margin-top: 40px;">
+      <div class="hero-card">
+        <h4 class="muted">Quick Stats</h4>
+        <div style="display:flex;gap:12px;margin-top:12px">
+          <div style="flex:1;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)">
+            <div class="muted">Projects</div>
+            <div style="font-size:22px;font-weight:800;color:var(--neon);margin-top:6px">5+</div>
+          </div>
+          <div style="flex:1;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)">
+            <div class="muted">Experience</div>
+            <div style="font-size:22px;font-weight:800;color:var(--accent);margin-top:6px">1+ yrs</div>
+          </div>
+        </div>
+
+        <div style="margin-top:14px">
+          <div class="muted">Top tools</div>
+          <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+            <div class="tag-pill">Python</div>
+            <div class="tag-pill">pandas</div>
+            <div class="tag-pill">scikit-learn</div>
+            <div class="tag-pill">Power BI</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px">
+        <h3 style="margin:0">Featured Projects</h3>
+        <div class="muted">Click a project to view details</div>
+      </div>
+
+      <div class="projects" id="projectsGrid">
+        <!-- Twitter Sentiment Analysis -->
+        <div class="card" data-title="Twitter Sentiment Analysis" data-desc="This project analyzes public tweets in real-time to determine their sentiment polarity (positive, negative, or neutral) and subjectivity using the TextBlob library. The results are stored in a structured CSV file for further data exploration and visualization." data-tags="Pandas,TextBlob,Tweepy,Python" data-github="https://github.com/amanita4t/Twitter-sentiment-analysis">
+          <h4>Twitter Sentiment Analysis</h4>
+          <p class="muted">Real-time tweet sentiment analysis</p>
+          <div class="tags">
+            <span class="tag-pill">Pandas</span>
+            <span class="tag-pill">TextBlob</span>
+            <span class="tag-pill">Tweepy</span>
+            <span class="tag-pill">Python</span>
+          </div>
+          <div class="actions">
+            <button class="btn primary" onclick="openModal(this)">View</button>
+            <button class="btn" onclick="window.open('https://github.com/amanita4t/Twitter-sentiment-analysis', '_blank')">Source</button>
+          </div>
+        </div>
+
+        <!-- Credit Card Fraud Detection -->
+        <div class="card" data-title="Credit Card Fraud Detection" data-desc="The goal of this project is to develop a machine learning model that can accurately detect fraudulent credit card transactions using historical data. By analyzing transaction patterns, the model aims to distinguish between normal and fraudulent activity, helping financial institutions flag suspicious behavior early and reduce potential risks." data-tags="NumPy,Seaborn,Scikit-learn,Matplotlib" data-github="https://github.com/amanita4t/Credit-Card-Fraud-Detection---ML">
+          <h4>Credit Card Fraud Detection</h4>
+          <p class="muted">ML model for fraud detection</p>
+          <div class="tags">
+            <span class="tag-pill">NumPy</span>
+            <span class="tag-pill">Seaborn</span>
+            <span class="tag-pill">Scikit-learn</span>
+            <span class="tag-pill">Matplotlib</span>
+          </div>
+          <div class="actions">
+            <button class="btn primary" onclick="openModal(this)">View</button>
+            <button class="btn" onclick="window.open('https://github.com/amanita4t/Credit-Card-Fraud-Detection---ML', '_blank')">Source</button>
+          </div>
+        </div>
+
+        <!-- Stock Price Prediction -->
+        <div class="card" data-title="Stock Price Prediction" data-desc="This project demonstrates how to predict Apple (AAPL) stock prices using Support Vector Regression (SVR) models. The workflow covers fetching real-world stock data, preprocessing it, training SVR models with different kernels, and visualizing the predictions." data-tags="pandas,numpy,yfinance,Python" data-github="https://github.com/amanita4t/Predicting-Stock-Price">
+          <h4>Stock Price Prediction</h4>
+          <p class="muted">AAPL stock prediction with SVR</p>
+          <div class="tags">
+            <span class="tag-pill">pandas</span>
+            <span class="tag-pill">numpy</span>
+            <span class="tag-pill">yfinance</span>
+            <span class="tag-pill">Python</span>
+          </div>
+          <div class="actions">
+            <button class="btn primary" onclick="openModal(this)">View</button>
+            <button class="btn" onclick="window.open('https://github.com/amanita4t/Predicting-Stock-Price', '_blank')">Source</button>
+          </div>
+        </div>
+
+        <!-- E-Commerce Sales Dashboard -->
+        <div class="card" data-title="E-Commerce Sales Dashboard" data-desc="This Power BI dashboard provides an interactive overview of e-commerce sales performance, profitability, and return patterns. It helps business decision-makers track key metrics, analyze sales trends, and uncover actionable insights." data-tags="Power BI,DAX,Data Visualization" data-github="https://github.com/amanita4t/E-Commerce_Sales">
+          <h4>E-Commerce Sales Dashboard</h4>
+          <p class="muted">Interactive Power BI dashboard</p>
+          <div class="tags">
+            <span class="tag-pill">Power BI</span>
+            <span class="tag-pill">DAX</span>
+            <span class="tag-pill">Data Visualization</span>
+          </div>
+          <div class="actions">
+            <button class="btn primary" onclick="openModal(this)">View</button>
+            <button class="btn" onclick="window.open('https://github.com/amanita4t/E-Commerce_Sales', '_blank')">Source</button>
+          </div>
+        </div>
+
+        <!-- Loan Approval Prediction -->
+        <div class="card" data-title="Loan Approval Prediction" data-desc="Loan approvals are a crucial process for banks and financial institutions, requiring careful assessment of an applicant's financial profile and credit history. In this project, we build a Machine Learning model that predicts whether a loan application will be approved or not based on applicant information." data-tags="Matplotlib,Seaborn,KNN,SVC" data-github="https://github.com/amanita4t/Loan-Approval-Prediction">
+          <h4>Loan Approval Prediction</h4>
+          <p class="muted">ML model for loan approval</p>
+          <div class="tags">
+            <span class="tag-pill">Matplotlib</span>
+            <span class="tag-pill">Seaborn</span>
+            <span class="tag-pill">KNN</span>
+            <span class="tag-pill">SVC</span>
+          </div>
+          <div class="actions">
+            <button class="btn primary" onclick="openModal(this)">View</button>
+            <button class="btn" onclick="window.open('https://github.com/amanita4t/Loan-Approval-Prediction', '_blank')">Source</button>
+          </div>
+        </div>
+
+        <!-- Empty card for future project -->
+        <div class="card" style="opacity:0.6; border-style:dashed">
+          <h4>Coming Soon</h4>
+          <p class="muted">Next exciting project</p>
+          <div class="tags"><span class="tag-pill">In Progress</span></div>
+          <div class="actions"><button class="btn primary" disabled>View</button><button class="btn" disabled>Source</button></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <h3 style="margin-top:30px">Skills</h3>
+      <div class="skills">
+        <div>
+          <div class="skill-row">
+            <div class="skill"><span>Python</span><span>95%</span></div>
+            <div class="bar" data-value="95"><i></i></div>
+          </div>
+
+          <div class="skill-row">
+            <div class="skill"><span>Machine Learning</span><span>88%</span></div>
+            <div class="bar" data-value="88"><i></i></div>
+          </div>
+
+          <div class="skill-row">
+            <div class="skill"><span>Data Visualization</span><span>85%</span></div>
+            <div class="bar" data-value="85"><i></i></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="skill-row">
+            <div class="skill"><span>SQL & Databases</span><span>82%</span></div>
+            <div class="bar" data-value="82"><i></i></div>
+          </div>
+
+          <div class="skill-row">
+            <div class="skill"><span>Production Engineering</span><span>78%</span></div>
+            <div class="bar" data-value="78"><i></i></div>
+          </div>
+
+          <div class="skill-row">
+            <div class="skill"><span>Power BI / DAX</span><span>80%</span></div>
+            <div class="bar" data-value="80"><i></i></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <h3 style="margin-top:30px">Contact</h3>
+      <div class="contact">
+        <form id="contactForm" action="https://formspree.io/f/mdkwqrrg" method="POST">
+          <div style="display:flex;gap:12px;flex-direction:column">
+            <div class="form-row">
+              <input type="text" name="name" id="name" placeholder="Your name" required />
+              <input type="email" name="email" id="email" placeholder="Your email" required />
+            </div>
+            <textarea name="message" id="message" placeholder="How can I help?" required></textarea>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div class="muted">Or reach me on 
+                <span class="social-links">
+                  <a href="https://github.com/amanita4t" target="_blank" class="social-link">GitHub</a>, 
+                  <a href="https://www.linkedin.com/in/amanuel-tekalign-81769a370/" target="_blank" class="social-link">LinkedIn</a>
+                </span>
+              </div>
+              <button type="submit" class="send">Send Message</button>
+            </div>
+            <div id="formStatus" class="form-status"></div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      Built with ❤️ • Amanuel Tekalign • © <span id="year"></span>
+    </footer>
+
+  </main>
+
+  <!-- Project Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-card" id="modalCard">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h4 id="modalTitle">Title</h4>
+        <button class="btn" onclick="closeModal()">Close</button>
+      </div>
+      <p id="modalDesc" class="muted" style="margin-top:10px">Description</p>
+      <div style="margin-top:12px" id="modalTags"></div>
+      <div style="margin-top:14px;display:flex;gap:10px;justify-content:flex-end">
+        <button class="btn primary" id="modalSourceBtn">Source</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Modal -->
+  <div class="modal contact-modal" id="contactModal">
+    <div class="modal-card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h4>Contact Me</h4>
+        <button class="btn" onclick="closeContactModal()">Close</button>
+      </div>
+      <div style="margin-top:20px">
+        <form id="modalContactForm" action="https://formspree.io/f/mdkwqrrg" method="POST">
+          <div style="display:flex;gap:12px;flex-direction:column">
+            <div class="form-row">
+              <input type="text" name="name" id="modalName" placeholder="Your name" required />
+              <input type="email" name="email" id="modalEmail" placeholder="Your email" required />
+            </div>
+            <textarea name="message" id="modalMessage" placeholder="How can I help?" required></textarea>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <div class="muted">Quick contact form</div>
+              <button type="submit" class="send">Send Message</button>
+            </div>
+            <div id="modalFormStatus" class="form-status"></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // small utilities and UI interactions
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // animate skill bars when in view
+    function animateSkills(){
+      document.querySelectorAll('.bar').forEach(el => {
+        const val = el.getAttribute('data-value') || 0;
+        const inner = el.querySelector('i');
+        setTimeout(()=> inner.style.width = val + '%', 150);
+      })
+    }
+
+    // trigger on load
+    window.addEventListener('load', ()=>{
+      animateSkills();
+      // small welcome console message
+      console.log('Welcome Amanuel — portfolio loaded');
+    })
+
+    // Project modal logic
+    let currentGithubLink = '';
+    
+    function openModal(btn){
+      const card = btn.closest('.card');
+      const title = card.getAttribute('data-title');
+      const desc = card.getAttribute('data-desc');
+      const tags = card.getAttribute('data-tags') || '';
+      const github = card.getAttribute('data-github') || '';
+      
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalDesc').textContent = desc;
+      currentGithubLink = github;
+      
+      const tagsEl = document.getElementById('modalTags');
+      tagsEl.innerHTML = '';
+      tags.split(',').forEach(t => { 
+        if(t.trim()){ 
+          const s = document.createElement('span'); 
+          s.className='tag-pill'; 
+          s.style.marginRight='8px'; 
+          s.textContent = t.trim(); 
+          tagsEl.appendChild(s);
+        } 
+      })
+      
+      document.getElementById('modal').classList.add('show');
+    }
+    
+    function closeModal(){ 
+      document.getElementById('modal').classList.remove('show');
+      currentGithubLink = '';
+    }
+
+    // Make modal source button functional
+    document.getElementById('modalSourceBtn').addEventListener('click', function() {
+      if (currentGithubLink) {
+        window.open(currentGithubLink, '_blank');
+      }
+    });
+
+    // Contact modal logic
+    function openContactModal() {
+      document.getElementById('contactModal').classList.add('show');
+    }
+    
+    function closeContactModal() {
+      document.getElementById('contactModal').classList.remove('show');
+    }
+
+    // Formspree form handling
+    async function handleFormSubmit(event, formId, statusId, closeModal = false) {
+      event.preventDefault();
+      
+      const form = event.target;
+      const status = document.getElementById(statusId);
+      const submitButton = form.querySelector('button[type="submit"]');
+      
+      // Disable submit button
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending...';
+      
+      try {
+        const formData = new FormData(form);
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+        
+        if (response.ok) {
+          status.textContent = 'Thanks for your message! I\'ll get back to you soon.';
+          status.className = 'form-status success';
+          form.reset();
+          
+          if (closeModal) {
+            setTimeout(() => {
+              closeContactModal();
+            }, 3000);
+          }
+        } else {
+          throw new Error('Form submission failed');
+        }
+      } catch (error) {
+        status.textContent = 'Oops! There was a problem sending your message. Please try again.';
+        status.className = 'form-status error';
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Send Message';
+      }
+    }
+
+    // Attach form handlers
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      handleFormSubmit(e, 'contactForm', 'formStatus', false);
+    });
+    
+    document.getElementById('modalContactForm').addEventListener('submit', (e) => {
+      handleFormSubmit(e, 'modalContactForm', 'modalFormStatus', true);
+    });
+
+    // simple theme toggle (light mode subtle)
+    const themeBtn = document.getElementById('themeToggle');
+    let dark=true;
+    themeBtn.addEventListener('click', ()=>{
+      if(dark){
+        document.documentElement.style.setProperty('--bg','#f7fbfd');
+        document.documentElement.style.setProperty('--card','#ffffff');
+        document.documentElement.style.setProperty('--muted','#345');
+        document.documentElement.style.setProperty('--neon','#0b6bff');
+        document.documentElement.style.setProperty('--accent','#ff6bcb');
+        document.documentElement.style.setProperty('color','#071017');
+        dark=false;
+      } else {
+        document.documentElement.style.setProperty('--bg','#071017');
+        document.documentElement.style.setProperty('--card','#0b1a22');
+        document.documentElement.style.setProperty('--muted','#9fb3bf');
+        document.documentElement.style.setProperty('--neon','#00ffd5');
+        document.documentElement.style.setProperty('--accent','#b400ff');
+        document.documentElement.style.setProperty('--color','#e6f7f5');
+        dark=true;
+      }
+    })
+
+    // simple nav anchor smooth scroll
+    document.querySelectorAll('.nav-links a').forEach(a=>{
+      a.addEventListener('click', e=>{
+        e.preventDefault();
+        const id = a.getAttribute('href').slice(1);
+        document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});
+      })
+    })
+
+    // close modal on background click
+    document.getElementById('modal').addEventListener('click', e=>{ if(e.target.id==='modal') closeModal(); })
+    document.getElementById('contactModal').addEventListener('click', e=>{ if(e.target.id==='contactModal') closeContactModal(); })
+
+  </script>
+
+</body>
+</html>
