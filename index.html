@@ -151,7 +151,7 @@
         <a href="#projects">Projects</a>
         <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
-        <button class="cta" id="themeToggle">Toggle Theme</button>
+        <button class="cta" id="themeToggle">Solarized Mode</button>
       </nav>
     </div>
   </div>
@@ -167,6 +167,7 @@
         <div style="margin-top:18px;display:flex;gap:12px;align-items:center">
           <a class="btn primary" href="#projects">See Projects</a>
           <button class="btn" onclick="openContactModal()">Contact Me</button>
+          <button class="btn primary" onclick="downloadResume()">Download Resume</button>
         </div>
 
         <div style="margin-top:22px;display:flex;gap:12px;align-items:center">
@@ -360,7 +361,7 @@
             <div style="display:flex;justify-content:space-between;align-items:center">
               <div class="muted">Or reach me on 
                 <span class="social-links">
-                  <a href="https://github.com/amanita4t" target="_blank" class="social-link">GitHub</a>, 
+                  <a href="https://github.com/amanita4t" target="_blank" class="social-link">GitHub</a> 
                   <a href="https://www.linkedin.com/in/amanuel-tekalign-81769a370/" target="_blank" class="social-link">LinkedIn</a>
                 </span>
               </div>
@@ -489,6 +490,12 @@
       document.getElementById('contactModal').classList.remove('show');
     }
 
+    // Download Resume function
+    function downloadResume() {
+      const resumeUrl = 'https://drive.google.com/uc?export=download&id=1LNkUfK1WrC4IiBA4WKU-VzHZO4YWCX48';
+      window.open(resumeUrl, '_blank');
+    }
+
     // Formspree form handling
     async function handleFormSubmit(event, formId, statusId, closeModal = false) {
       event.preventDefault();
@@ -542,28 +549,51 @@
       handleFormSubmit(e, 'modalContactForm', 'modalFormStatus', true);
     });
 
-    // simple theme toggle (light mode subtle)
+    // Creative Solarized Theme Toggle
     const themeBtn = document.getElementById('themeToggle');
-    let dark=true;
-    themeBtn.addEventListener('click', ()=>{
-      if(dark){
-        document.documentElement.style.setProperty('--bg','#f7fbfd');
-        document.documentElement.style.setProperty('--card','#ffffff');
-        document.documentElement.style.setProperty('--muted','#345');
-        document.documentElement.style.setProperty('--neon','#0b6bff');
-        document.documentElement.style.setProperty('--accent','#ff6bcb');
-        document.documentElement.style.setProperty('color','#071017');
-        dark=false;
-      } else {
-        document.documentElement.style.setProperty('--bg','#071017');
-        document.documentElement.style.setProperty('--card','#0b1a22');
-        document.documentElement.style.setProperty('--muted','#9fb3bf');
-        document.documentElement.style.setProperty('--neon','#00ffd5');
-        document.documentElement.style.setProperty('--accent','#b400ff');
-        document.documentElement.style.setProperty('--color','#e6f7f5');
-        dark=true;
-      }
-    })
+    let dark = true;
+
+    themeBtn.addEventListener('click', () => {
+        if(dark){
+            // Solarized Warm Theme - Creative & Professional
+            document.documentElement.style.setProperty('--bg', '#fdf6e3');
+            document.documentElement.style.setProperty('--card', '#eee8d5');
+            document.documentElement.style.setProperty('--muted', '#839496');
+            document.documentElement.style.setProperty('--neon', '#cb4b16');
+            document.documentElement.style.setProperty('--accent', '#d33682');
+            document.documentElement.style.setProperty('--glass', 'rgba(0,0,0,0.03)');
+            document.documentElement.style.setProperty('--glass-2', 'rgba(0,0,0,0.05)');
+            document.documentElement.style.setProperty('color', '#657b83');
+            
+            // Update body background for solarized theme
+            document.body.style.background = 'radial-gradient(1200px 600px at 10% 10%, rgba(203, 75, 22, 0.05), transparent), radial-gradient(800px 400px at 95% 90%, rgba(211, 54, 130, 0.05), transparent), #fdf6e3';
+            
+            // Update the hero name color for better contrast
+            document.getElementById('heroName').style.color = '#657b83';
+            
+            dark = false;
+            themeBtn.textContent = 'Dark Mode';
+        } else {
+            // Original Dark Theme
+            document.documentElement.style.setProperty('--bg', '#071017');
+            document.documentElement.style.setProperty('--card', '#0b1a22');
+            document.documentElement.style.setProperty('--muted', '#9fb3bf');
+            document.documentElement.style.setProperty('--neon', '#00ffd5');
+            document.documentElement.style.setProperty('--accent', '#b400ff');
+            document.documentElement.style.setProperty('--glass', 'rgba(255,255,255,0.03)');
+            document.documentElement.style.setProperty('--glass-2', 'rgba(255,255,255,0.02)');
+            document.documentElement.style.setProperty('color', '#e6f7f5');
+            
+            // Restore original body background
+            document.body.style.background = 'radial-gradient(1200px 600px at 10% 10%, rgba(0,255,213,0.03), transparent), radial-gradient(800px 400px at 95% 90%, rgba(180,0,255,0.03), transparent), #071017';
+            
+            // Restore hero text color
+            document.getElementById('heroName').style.color = '#e6f7f5';
+            
+            dark = true;
+            themeBtn.textContent = 'Solarized Mode';
+        }
+    });
 
     // simple nav anchor smooth scroll
     document.querySelectorAll('.nav-links a').forEach(a=>{
