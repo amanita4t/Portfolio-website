@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>Amanuel Tekalign — Data Scientist Portfolio</title>
   <meta name="description" content="Portfolio of Amanuel Tekalign — Data Scientist | Engineer" />
 
@@ -100,11 +100,93 @@
       .hero{grid-template-columns:1fr;}
       .projects{grid-template-columns:repeat(2,1fr)}
     }
+    
+    @media (max-width:768px) {
+      .container {
+        padding: 20px 15px;
+      }
+      
+      .hero {
+        padding: 100px 0 20px;
+      }
+      
+      .intro h2 {
+        font-size: 28px;
+      }
+      
+      .profile {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+      }
+      
+      .skills {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+      
+      .form-row {
+        flex-direction: column;
+        gap: 12px;
+      }
+      
+      /* Button group stack on mobile */
+      .hero .intro > div:first-of-type {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .hero .intro > div:first-of-type .btn {
+        text-align: center;
+      }
+    }
+    
     @media (max-width:640px){
-      .nav-links{display:none}
+      .nav-links{
+        display: flex;
+        gap: 8px;
+      }
+      .nav-links a{
+        padding: 6px 8px;
+        font-size: 12px;
+      }
+      .cta{
+        padding: 6px 8px;
+        font-size: 11px;
+      }
+      .brand h1{
+        display: block;
+        font-size: 14px;
+      }
       .projects{grid-template-columns:1fr}
       .intro p{max-width:100%}
-      .brand h1{display:none}
+    }
+    
+    @media (max-width: 480px) {
+      .intro h2 {
+        font-size: 24px;
+      }
+      
+      .hero-card > div:first-of-type {
+        flex-direction: column;
+      }
+      
+      .tag-pill {
+        font-size: 11px;
+        padding: 4px 6px;
+      }
+      
+      .card .actions {
+        flex-direction: column;
+      }
+      
+      .card .actions .btn {
+        text-align: center;
+      }
+      
+      .container {
+        padding: 15px 10px;
+      }
     }
 
     /* small utilities */
@@ -112,12 +194,37 @@
     .center{display:grid;place-items:center}
 
     /* Modal */
-    .modal{position:fixed;inset:0;display:grid;place-items:center;background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6));visibility:hidden;opacity:0;transition:all .2s; z-index:100}
+    .modal{
+      position:fixed;
+      inset:0;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6));
+      visibility:hidden;
+      opacity:0;
+      transition:all .2s; 
+      z-index:100;
+      padding: 20px;
+      box-sizing: border-box;
+    }
     .modal.show{visibility:visible;opacity:1}
-    .modal-card{width:720px;max-width:94%;background:linear-gradient(180deg,#071a1f,#051014);padding:22px;border-radius:14px;border:1px solid rgba(255,255,255,0.04)}
+    .modal-card{
+      width: 100%;
+      max-width: 720px;
+      background:linear-gradient(180deg,#071a1f,#051014);
+      padding: 20px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.04);
+      max-height: 90vh;
+      overflow-y: auto;
+      box-sizing: border-box;
+    }
 
     /* Contact Modal */
-    .contact-modal .modal-card{width:500px;max-width:90%}
+    .contact-modal .modal-card{
+      max-width: 500px;
+      width: 90vw;
+    }
 
     /* micro animations */
     .glow{animation:neon 2.4s ease-in-out infinite}
@@ -132,7 +239,6 @@
     .form-status{display:none;padding:10px;border-radius:8px;margin-top:10px;text-align:center}
     .form-status.success{display:block;background:rgba(0,255,213,0.1);color:var(--neon);border:1px solid var(--neon)}
     .form-status.error{display:block;background:rgba(255,0,0,0.1);color:#ff6b6b;border:1px solid #ff6b6b}
-
   </style>
 </head>
 <body>
